@@ -19,5 +19,15 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-annotations</artifactId>
+    	<version>3.3.0.ga</version>
+    </dependency>
+    <dependency>
+    	<groupId>org.hibernate</groupId>
+    	<artifactId>hibernate-commons-annotation</artifactId>
+    	<version>3.3.0.ga</version>
+    </dependency>
   </dependencies>
 </project>
