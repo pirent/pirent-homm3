@@ -1,0 +1,17 @@
+# ====== SETUP DATASOURCE ====
+# Enter these following configuration to $JBOSS_HOME/standalone/configuration/standalone.xml
+# ============================
+<datasource jndi-name="java:jboss/datasources/MySQL" pool-name="MySQL">
+                    <connection-url>jdbc:mysql://localhost:3306/pirent_homm3</connection-url>
+                    <driver>mysql</driver>
+                    <security>
+                        <user-name>dummy</user-name>
+                        <password>dummy</password>
+                    </security>
+                </datasource>
+                <drivers>
+                    <driver name="mysql" module="com.mysql">
+                        <driver-class>com.mysql.jdbc.Driver</driver-class>
+                    </driver>
+                </drivers>
+# ===========================
