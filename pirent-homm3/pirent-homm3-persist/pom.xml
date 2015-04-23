@@ -12,17 +12,80 @@
   <version>1.0-SNAPSHOT</version>
   <name>pirent-homm3-persist</name>
   <url>http://maven.apache.org</url>
+
+  <dependencyManagement>
+    <dependencies>
+	<dependency>
+	  <groupId>org.jboss.arquillian</groupId>
+	  <artifactId>arquillian-bom</artifactId>
+	  <version>1.1.8.Final</version>
+	  <scope>import</scope>
+	  <type>pom</type>
+	</dependency>
+    </dependencies>
+  </dependencyManagement>
+
+
   <dependencies>
-  <dependency>
+     
+     <!-- Database driver -->
+     <dependency>
 	<groupId>mysql</groupId>
 	<artifactId>mysql-connector-java</artifactId>
 	<version>5.1.35</version>
-</dependency>
+    </dependency>
+
+    <!-- Compile dependencies -->
+     <dependency>
+	<groupId>com.github.pirent</groupId>
+        <artifactId>test-support</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+     <dependency>
+	<groupId>com.wordpress.pirent420</groupId>
+        <artifactId>pirent-homm3-model</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+     <dependency>
+	<groupId>org.jboss.spec</groupId>
+	<artifactId>jboss-javaee-6.0</artifactId>
+	<version>1.0.0.Final</version>
+	<type>pom</type>
+	<scope>provided</scope>
+    </dependency>
+
+    <!-- Test dependencies -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.1</version>
+      <version>4.8.1</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+	<groupId>org.jboss.arquillian.junit</groupId>
+	<artifactId>arquillian-junit-container</artifactId>
+	<scope>test</scope>
+    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+	<plugin>
+	  <artifactId>maven-compiler-plugin</artifactId>
+	  <version>2.3.2</version>
+	  <configuration>
+	    <source>1.6</source>
+	    <target>1.6</target>
+	  </configuration>
+	</plugin>
+	
+	<plugin>
+	  <artifactId>maven-surefire-plugin</artifactId>
+	  <version>2.17</version>
+	</plugin>
+    </plugins>
+  </build>
 </project>

@@ -6,16 +6,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Creature {
+public class Creature
+{
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	private String name;
 	private Integer tier;
 	private Boolean upgraded;
@@ -26,122 +29,173 @@ public class Creature {
 	private Integer damageMax;
 	private Integer speed;
 	private Integer shots;
-	
+
 	@ManyToOne
-	// TODO: add mapping value here
+	@JoinColumn(name = "faction_id")
+	// Unidirectional relationship
 	private Faction faction;
-	
+
 	@ManyToMany
-	// TODO: add mapping value here
+	@JoinTable(
+		name = "create_special_ability", 
+		joinColumns = @JoinColumn(name = "creature_id"), 
+		inverseJoinColumns = @JoinColumn(name = "special_ability_id")
+	)
 	private Collection<SpecialAbility> specialAbilities;
 
-	public Creature() {
+	public Creature()
+	{
 		super();
 	}
 
-	public Integer getId() {
+	public Creature(String name, Integer tier, Boolean upgraded,
+			Integer health, Integer attack, Integer defense, Integer damageMin,
+			Integer damageMax, Integer speed, Integer shots, Faction faction,
+			Collection<SpecialAbility> specialAbilities)
+	{
+		super();
+		this.name = name;
+		this.tier = tier;
+		this.upgraded = upgraded;
+		this.health = health;
+		this.attack = attack;
+		this.defense = defense;
+		this.damageMin = damageMin;
+		this.damageMax = damageMax;
+		this.speed = speed;
+		this.shots = shots;
+		this.faction = faction;
+		this.specialAbilities = specialAbilities;
+	}
+
+	public Integer getId()
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id)
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public Integer getTier() {
+	public Integer getTier()
+	{
 		return tier;
 	}
 
-	public void setTier(Integer tier) {
+	public void setTier(Integer tier)
+	{
 		this.tier = tier;
 	}
 
-	public Boolean getUpgraded() {
+	public Boolean getUpgraded()
+	{
 		return upgraded;
 	}
 
-	public void setUpgraded(Boolean upgraded) {
+	public void setUpgraded(Boolean upgraded)
+	{
 		this.upgraded = upgraded;
 	}
 
-	public Integer getHealth() {
+	public Integer getHealth()
+	{
 		return health;
 	}
 
-	public void setHealth(Integer health) {
+	public void setHealth(Integer health)
+	{
 		this.health = health;
 	}
 
-	public Integer getAttack() {
+	public Integer getAttack()
+	{
 		return attack;
 	}
 
-	public void setAttack(Integer attack) {
+	public void setAttack(Integer attack)
+	{
 		this.attack = attack;
 	}
 
-	public Integer getDefense() {
+	public Integer getDefense()
+	{
 		return defense;
 	}
 
-	public void setDefense(Integer defense) {
+	public void setDefense(Integer defense)
+	{
 		this.defense = defense;
 	}
 
-	public Integer getDamageMin() {
+	public Integer getDamageMin()
+	{
 		return damageMin;
 	}
 
-	public void setDamageMin(Integer damageMin) {
+	public void setDamageMin(Integer damageMin)
+	{
 		this.damageMin = damageMin;
 	}
 
-	public Integer getDamageMax() {
+	public Integer getDamageMax()
+	{
 		return damageMax;
 	}
 
-	public void setDamageMax(Integer damageMax) {
+	public void setDamageMax(Integer damageMax)
+	{
 		this.damageMax = damageMax;
 	}
 
-	public Integer getSpeed() {
+	public Integer getSpeed()
+	{
 		return speed;
 	}
 
-	public void setSpeed(Integer speed) {
+	public void setSpeed(Integer speed)
+	{
 		this.speed = speed;
 	}
 
-	public Integer getShots() {
+	public Integer getShots()
+	{
 		return shots;
 	}
 
-	public void setShots(Integer shots) {
+	public void setShots(Integer shots)
+	{
 		this.shots = shots;
 	}
 
-	public Faction getFaction() {
+	public Faction getFaction()
+	{
 		return faction;
 	}
 
-	public void setFaction(Faction faction) {
+	public void setFaction(Faction faction)
+	{
 		this.faction = faction;
 	}
 
-	public Collection<SpecialAbility> getSpecialAbilities() {
+	public Collection<SpecialAbility> getSpecialAbilities()
+	{
 		return specialAbilities;
 	}
 
-	public void setSpecialAbilities(Collection<SpecialAbility> specialAbilities) {
+	public void setSpecialAbilities(Collection<SpecialAbility> specialAbilities)
+	{
 		this.specialAbilities = specialAbilities;
 	}
-	
-	
+
 }

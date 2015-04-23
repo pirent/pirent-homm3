@@ -9,45 +9,59 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class SpecialAbility {
+public class SpecialAbility
+{
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	private String name;
-	
-	@ManyToMany
-	// TODO add value for mapping column
+
+	@ManyToMany(mappedBy = "specialAbilities")
+	// "Creature" is the owning side of this relationship
 	private Collection<Creature> creatures;
 
-	public SpecialAbility() {
+	public SpecialAbility()
+	{
 		super();
 	}
 
-	public Integer getId() {
+	public SpecialAbility(String name, Collection<Creature> creatures)
+	{
+		super();
+		this.name = name;
+		this.creatures = creatures;
+	}
+
+	public Integer getId()
+	{
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Integer id)
+	{
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
-	public Collection<Creature> getCreatures() {
+	public Collection<Creature> getCreatures()
+	{
 		return creatures;
 	}
 
-	public void setCreatures(Collection<Creature> creatures) {
+	public void setCreatures(Collection<Creature> creatures)
+	{
 		this.creatures = creatures;
 	}
-	
-	
+
 }

@@ -18,6 +18,12 @@ public class Faction {
 		super();
 	}
 
+	public Faction(String name)
+	{
+		super();
+		this.name = name;
+	}
+
 	public Integer getId() {
 		return id;
 	}
