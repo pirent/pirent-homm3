@@ -1,6 +1,6 @@
-# ====== SETUP DATASOURCE ====
+# ========================== SETUP DATASOURCE ======================================
 # Enter these following configuration to $JBOSS_HOME/standalone/configuration/standalone.xml
-# ============================
+# ==================================================================================
 <datasource jndi-name="java:jboss/datasources/MySQL" pool-name="MySQL">
                     <connection-url>jdbc:mysql://localhost:3306/pirent_homm3</connection-url>
                     <driver>mysql</driver>
@@ -14,4 +14,6 @@
                         <driver-class>com.mysql.jdbc.Driver</driver-class>
                     </driver>
                 </drivers>
-# ===========================
+</datasource>
+
+Remember not to remove section of H2 database (the default datasource in JBoss), it will used later for persistence testing by integration test.

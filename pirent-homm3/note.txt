@@ -1,0 +1,4 @@
+May 9 2015
+----------------------
+Command to run persistence test:
+mvn test -Parquillian-jbossas-remote -Dtest=FactionPersistenceTest
