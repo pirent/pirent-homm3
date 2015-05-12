@@ -34,4 +34,10 @@ public class CreatureServiceBean implements CreatureService
 		return null;
 	}
 
+	public Collection<Creature> getCreaturesByFaction(int factionId)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
