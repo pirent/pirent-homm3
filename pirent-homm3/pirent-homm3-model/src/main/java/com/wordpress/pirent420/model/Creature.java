@@ -1,7 +1,8 @@
-package com.wordpress.pirent420;
+package com.wordpress.pirent420.model;
 
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="creature")
 public class Creature
 {
 
@@ -25,8 +28,13 @@ public class Creature
 	private Integer health;
 	private Integer attack;
 	private Integer defense;
+	
+	@Column(name="damage_min")
 	private Integer damageMin;
+	
+	@Column(name="damage_max")
 	private Integer damageMax;
+	
 	private Integer speed;
 	private Integer shots;
 

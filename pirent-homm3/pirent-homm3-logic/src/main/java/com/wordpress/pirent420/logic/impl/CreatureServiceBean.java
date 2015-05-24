@@ -10,8 +10,8 @@ import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
-import com.wordpress.pirent420.Creature;
 import com.wordpress.pirent420.logic.api.CreatureService;
+import com.wordpress.pirent420.model.Creature;
 import com.wordpress.pirent420.persist.api.CreatureDao;
 
 @Stateless
@@ -30,14 +30,12 @@ public class CreatureServiceBean implements CreatureService
 
 	public Collection<Creature> getCreatures(Collection<Integer> ids)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return creatureDao.getCreatures(ids);
 	}
 
-	public Collection<Creature> getCreaturesByFaction(int factionId)
+	public Collection<Creature> getCreaturesByFaction(int factionId, Boolean isUpgraded)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return creatureDao.getCreaturesByFaction(factionId, isUpgraded);
 	}
 
 }

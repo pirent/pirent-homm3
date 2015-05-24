@@ -2,11 +2,11 @@ package com.wordpress.pirent420.persist.api;
 
 import java.util.Collection;
 
-import com.wordpress.pirent420.Creature;
+import com.wordpress.pirent420.model.Creature;
 
 public interface CreatureDao extends Dao<Creature>
 {
 	Collection<Creature> getCreatures (Collection<Integer> ids);
 	
-	Collection<Creature> getCreaturesByFaction (int factionId);
+	Collection<Creature> getCreaturesByFaction (Integer factionId, Boolean isUpgraded);
 }

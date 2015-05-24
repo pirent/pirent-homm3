@@ -10,7 +10,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.Query;
 
-import com.wordpress.pirent420.Creature;
+import com.wordpress.pirent420.model.Creature;
 import com.wordpress.pirent420.persist.api.CreatureDao;
 import com.wordpress.pirent420.persist.api.JpaDao;
 
@@ -42,15 +42,26 @@ public class JpaCreatureDao extends JpaDao<Creature> implements CreatureDao
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Creature> getCreaturesByFaction(int factionId)
+	public Collection<Creature> getCreaturesByFaction(Integer factionId,
+			Boolean isUpgraded)
 	{
 		StringBuilder jqlString = new StringBuilder("SELECT c FROM ").append(
 				Creature.class.getSimpleName()).append(
 				" c WHERE c.faction.id = :factionId");
 
+		if (isUpgraded != null)
+		{
+			jqlString.append(" AND c.upgraded = :isUpgraded");
+		}
+
 		Query query = em.createQuery(jqlString.toString());
 		query.setParameter("factionId", factionId);
-
+		
+		if (isUpgraded != null)
+		{
+			query.setParameter("isUpgraded", isUpgraded);
+		}
+		
 		return query.getResultList();
 	}
 

@@ -6,14 +6,13 @@
   version="2.0">
    <persistence-unit name="homm3-pu">
       <jta-data-source>java:jboss/datasources/MySQL</jta-data-source>
+      
+<!--       <class>com.wordpress.pirent420.model.Creature</class> -->
+<!--       <class>com.wordpress.pirent420.model.Faction</class> -->
+<!--       <class>com.wordpress.pirent420.model.SpecialAbility</class> -->
+      
       <properties>
-          <!-- 
-
-          Vendor-specific config here
-          e.g., enable Hibernate to dump SQL output to STDOUT
-          <property name="hibernate.show_sql" value="true"/>
-          
-           --> 
+           <property name="hibernate.show_sql" value="true"/>
       </properties>
    </persistence-unit>
 </persistence>

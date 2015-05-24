@@ -1,15 +1,14 @@
-package com.wordpress.pirent420;
-
-import java.util.Collection;
+package com.wordpress.pirent420.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
-public class SpecialAbility
+@Table(name="faction")
+public class Faction
 {
 
 	@Id
@@ -18,20 +17,15 @@ public class SpecialAbility
 
 	private String name;
 
-	@ManyToMany(mappedBy = "specialAbilities")
-	// "Creature" is the owning side of this relationship
-	private Collection<Creature> creatures;
-
-	public SpecialAbility()
+	public Faction()
 	{
 		super();
 	}
 
-	public SpecialAbility(String name, Collection<Creature> creatures)
+	public Faction(String name)
 	{
 		super();
 		this.name = name;
-		this.creatures = creatures;
 	}
 
 	public Integer getId()
@@ -54,16 +48,6 @@ public class SpecialAbility
 		this.name = name;
 	}
 
-	public Collection<Creature> getCreatures()
-	{
-		return creatures;
-	}
-
-	public void setCreatures(Collection<Creature> creatures)
-	{
-		this.creatures = creatures;
-	}
-
 	@Override
 	public int hashCode()
 	{
@@ -82,7 +66,7 @@ public class SpecialAbility
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SpecialAbility other = (SpecialAbility) obj;
+		Faction other = (Faction) obj;
 		if (id == null)
 		{
 			if (other.id != null)
@@ -97,9 +81,8 @@ public class SpecialAbility
 	public String toString()
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append("SpecialAbility [id=").append(id).append(", name=")
-				.append(name).append(", creatures=").append(creatures)
-				.append("]");
+		builder.append("Faction [id=").append(id).append(", name=")
+				.append(name).append("]");
 		return builder.toString();
 	}
 

@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.wordpress.pirent420.Faction;
+import com.wordpress.pirent420.model.Faction;
 import com.wordpress.pirent420.persist.api.FactionDao;
 import com.wordpress.pirent420.persist.impl.JpaFactionDao;
 

@@ -2,7 +2,7 @@ package com.wordpress.pirent420.logic.api;
 
 import java.util.Collection;
 
-import com.wordpress.pirent420.Creature;
+import com.wordpress.pirent420.model.Creature;
 
 public interface CreatureService
 {
@@ -10,5 +10,5 @@ public interface CreatureService
 	
 	Collection<Creature> getCreatures(Collection<Integer> ids);
 	
-	Collection<Creature> getCreaturesByFaction(int factionId);
+	Collection<Creature> getCreaturesByFaction(int factionId, Boolean isUpgraded);
 }

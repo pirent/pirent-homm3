@@ -14,6 +14,18 @@
 	<name>pirent-homm3-logic</name>
 	<url>http://maven.apache.org</url>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>1.1.8.Final</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 
 		<dependency>
@@ -21,13 +33,13 @@
 			<artifactId>pirent-homm3-model</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.wordpress.pirent420</groupId>
 			<artifactId>pirent-homm3-persist</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
 			<artifactId>jboss-javaee-6.0</artifactId>
@@ -35,6 +47,70 @@
 			<type>pom</type>
 			<scope>provided</scope>
 		</dependency>
-		
+
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-depchain</artifactId>
+			<version>2.0.0</version>
+			<scope>test</scope>
+			<type>pom</type>
+		</dependency>
+
 	</dependencies>
+
+	<profiles>
+
+		<profile>
+			<id>arquillian-jbossas-remote</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.jboss.as</groupId>
+					<artifactId>jboss-as-arquillian-container-remote</artifactId>
+					<version>7.2.0.Final</version>
+					<scope>test</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>org.jboss.arquillian.protocol</groupId>
+					<artifactId>arquillian-protocol-servlet</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+			</plugin>
+		</plugins>
+	</build>
+
+
 </project>
