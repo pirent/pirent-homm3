@@ -27,8 +27,7 @@ public class FactionServiceBean implements FactionService
 	@Override
 	public Faction getFaction(int id)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return factionDao.findById(id);
 	}
 
 	@Override
@@ -38,10 +37,9 @@ public class FactionServiceBean implements FactionService
 	}
 
 	@Override
-	public Collection<Faction> getFactions(Collection<Integer> ids)
+	public Collection<Faction> getAll()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		return factionDao.getAll();
 	}
 
 }

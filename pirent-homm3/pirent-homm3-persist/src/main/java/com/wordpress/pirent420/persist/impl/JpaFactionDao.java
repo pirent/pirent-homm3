@@ -1,5 +1,7 @@
 package com.wordpress.pirent420.persist.impl;
 
+import java.util.Collection;
+
 import javax.ejb.Local;
 import javax.ejb.Singleton;
 import javax.ejb.TransactionAttribute;
@@ -30,11 +32,24 @@ public class JpaFactionDao extends JpaDao<Faction> implements FactionDao
 		StringBuilder jpql = new StringBuilder("SELECT f FROM ").append(
 				Faction.class.getSimpleName())
 				.append(" f WHERE f.name = :name");
-		
+
 		Query query = em.createQuery(jpql.toString(), Faction.class);
 		query.setParameter("name", name);
-		
+
 		return (Faction) query.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Faction> getAll()
+	{
+		StringBuilder jpql = new StringBuilder("SELECT f FROM ").append(
+				Faction.class.getSimpleName()).append(" f");
+		
+		Query query = em.createQuery(jpql.toString());
+		
+		return query.getResultList();
+
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.wordpress.pirent420.logic;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,15 +15,16 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.wordpress.pirent420.logic.api.CreatureService;
 import com.wordpress.pirent420.logic.api.FactionService;
+import com.wordpress.pirent420.logic.api.SpecialAbilityService;
 import com.wordpress.pirent420.logic.impl.CreatureServiceBean;
 import com.wordpress.pirent420.model.Creature;
 import com.wordpress.pirent420.model.Faction;
+import com.wordpress.pirent420.model.SpecialAbility;
 import com.wordpress.pirent420.persist.api.CreatureDao;
 import com.wordpress.pirent420.persist.impl.JpaCreatureDao;
 
@@ -38,9 +38,9 @@ public class LogicIntegrationTest
 	{ "Skeleton", "Walking Dead", "Wight", "Vampire", "Lich", "Black Knight",
 			"Bone Dragon" };
 
-//	private static final String[] DEPLOYMENT_LIBS =
-//	{ "com.wordpress.pirent420:pirent-homm3-model:1.0-SNAPSHOT",
-//			"com.wordpress.pirent420:pirent-homm3-persist:1.0-SNAPSHOT" };
+	private static final String[] FACTION_NAMES =
+	{ "Castle", "Conflux", "Rampart", "Necropolis", "Stronghold", "Fortress",
+			"Tower", "Inferno", "Dungeon" };
 
 	@Deployment
 	public static Archive<?> createDeployment()
@@ -55,32 +55,24 @@ public class LogicIntegrationTest
 		deployment.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 		deployment.addAsResource("persistence.xml", "META-INF/persistence.xml");
 
-//		File[] libs = Maven.configureResolver().withClassPathResolution(false)
-//				.resolve(DEPLOYMENT_LIBS).withoutTransitivity().asFile();
-//		for (File f : libs)
-//		{
-//			deployment.addAsLibrary(f);
-//		}
-
 		System.out.println(deployment.toString(true));
 		return deployment;
 	}
 
-	@EJB(mappedName = "java:app/logic_integration_test/JpaFactionDao!com.wordpress.pirent420.persist.api.FactionDao")
+	@EJB(mappedName = "java:module/CreatureServiceBean")
 	private CreatureService creatureService;
 
 	@EJB(mappedName = "java:app/logic_integration_test/FactionServiceBean!com.wordpress.pirent420.logic.api.FactionService")
 	private FactionService factionService;
+	
+	@EJB(mappedName = "java:module/SpecialAbilityServiceBean")
+	private SpecialAbilityService specialAbilityService;
 
 	@Test
 	public void testGetCreaturesByFaction()
 	{
-		Faction f = factionService.getFaction(FACTION_NAME);
-		Assert.assertEquals("Name of faction is not the same", FACTION_NAME,
-				f.getName());
-
-		Collection<Creature> unUpgradedNecroCreatures = creatureService
-				.getCreaturesByFaction(f.getId(), Boolean.FALSE);
+		Collection<Creature> unUpgradedNecroCreatures = getCreature(
+				FACTION_NAME, Boolean.FALSE);
 
 		Assert.assertEquals("The creature quantity must be the same",
 				NECROPOLIS_CREATURE_NAMES.length,
@@ -93,5 +85,72 @@ public class LogicIntegrationTest
 		}
 		Assert.assertTrue("Must contain all creatures",
 				names.containsAll(Arrays.asList(NECROPOLIS_CREATURE_NAMES)));
+	}
+
+	@Test
+	public void testGetCreaturesById()
+	{
+		Collection<Creature> unUpgradedNecroCreatures = getCreature(
+				FACTION_NAME, Boolean.FALSE);
+
+		List<Integer> ids = new ArrayList<Integer>();
+		for (Creature c : unUpgradedNecroCreatures)
+		{
+			ids.add(c.getId());
+		}
+
+		Collection<Creature> roundtrip = creatureService.getCreatures(ids);
+		Assert.assertTrue("The creatures get back by ID should be the same",
+				unUpgradedNecroCreatures.containsAll(roundtrip));
+	}
+
+	@Test
+	public void testGetAllFactions()
+	{
+		Collection<Faction> factions = factionService.getAll();
+		Assert.assertEquals("The faction size must be the same",
+				FACTION_NAMES.length, factions.size());
+	}
+	
+	@Test
+	public void testGetSpecialAbilitiesByCreature()
+	{
+		final String griffinName = "Griffin";
+		final String pikemanName = "Pikeman";
+		
+		Creature griffin = creatureService.getCreature(griffinName);
+		Creature pikeman = creatureService.getCreature(pikemanName);
+		
+		Assert.assertNotNull("Griffin must be found", griffin);
+		Assert.assertNotNull("Pikeman must be found", pikeman);
+		
+		Collection<SpecialAbility> griffinAbilities = specialAbilityService.getSpecialAbilities(griffin.getId());
+		Collection<SpecialAbility> pikemanAbilities = specialAbilityService.getSpecialAbilities(pikeman.getId());
+		
+		Assert.assertTrue("Griffin must have special ability", !griffinAbilities.isEmpty());
+		Assert.assertTrue("Pikeman must not have any special ability", pikemanAbilities.isEmpty());
+	}
+
+	/**
+	 * Get the creatures of a specific faction.
+	 * 
+	 * @param factionName
+	 *            name of faction
+	 * @param isUpgraded
+	 *            true to select upgraded creatures and vice versa. Leave it
+	 *            NULL to select all.
+	 * @return
+	 */
+	private Collection<Creature> getCreature(String factionName,
+			Boolean isUpgraded)
+	{
+		Faction f = factionService.getFaction(FACTION_NAME);
+		Assert.assertEquals("Name of faction is not the same", factionName,
+				f.getName());
+
+		Collection<Creature> creatures = creatureService.getCreaturesByFaction(
+				f.getId(), isUpgraded);
+
+		return creatures;
 	}
 }

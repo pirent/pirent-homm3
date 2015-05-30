@@ -56,13 +56,26 @@ public class JpaCreatureDao extends JpaDao<Creature> implements CreatureDao
 
 		Query query = em.createQuery(jqlString.toString());
 		query.setParameter("factionId", factionId);
-		
+
 		if (isUpgraded != null)
 		{
 			query.setParameter("isUpgraded", isUpgraded);
 		}
-		
+
 		return query.getResultList();
+	}
+
+	@Override
+	public Creature getCreature(String name)
+	{
+		StringBuilder jql = new StringBuilder("SELECT c FROM ").append(
+				Creature.class.getSimpleName()).append(
+				" c WHERE c.name = :name");
+		
+		Query query = em.createQuery(jql.toString(), Creature.class);
+		query.setParameter("name", name);
+		
+		return (Creature) query.getSingleResult();
 	}
 
 }

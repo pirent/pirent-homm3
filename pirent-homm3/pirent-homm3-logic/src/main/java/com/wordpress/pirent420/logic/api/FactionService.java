@@ -10,5 +10,5 @@ public interface FactionService
 	
 	Faction getFaction(String name);
 	
-	Collection<Faction> getFactions(Collection<Integer> ids);
+	Collection<Faction> getAll();
 }
