@@ -53,7 +53,7 @@ public class LogicIntegrationTest
 				Creature.class.getPackage(), CreatureDao.class.getPackage(),
 				JpaCreatureDao.class.getPackage());
 		deployment.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-		deployment.addAsResource("persistence.xml", "META-INF/persistence.xml");
+		deployment.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml");
 
 		System.out.println(deployment.toString(true));
 		return deployment;

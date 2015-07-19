@@ -1,6 +1,9 @@
 package com.wordpress.pirent420.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +14,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="special_ability")
-public class SpecialAbility
+public class SpecialAbility implements Serializable
 {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +28,7 @@ public class SpecialAbility
 
 	private String name;
 
-	@ManyToMany(mappedBy = "specialAbilities")
+	@ManyToMany(mappedBy="specialAbilities")
 	// "Creature" is the owning side of this relationship
 	private Collection<Creature> creatures;
 
@@ -98,11 +106,16 @@ public class SpecialAbility
 	@Override
 	public String toString()
 	{
+		List<String> creaturesNames = new ArrayList<String>();
+		for (Creature c : getCreatures())
+		{
+			creaturesNames.add(c.getName());
+		}
+
 		StringBuilder builder = new StringBuilder();
 		builder.append("SpecialAbility [id=").append(id).append(", name=")
-				.append(name).append(", creatures=").append(creatures)
-				.append("]");
+				.append(name).append(", creatures=").append(", creatures=")
+				.append(creaturesNames).append("]");
 		return builder.toString();
 	}
-
 }

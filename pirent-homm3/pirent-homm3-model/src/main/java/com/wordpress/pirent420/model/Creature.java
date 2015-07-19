@@ -1,5 +1,6 @@
 package com.wordpress.pirent420.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -15,8 +16,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="creature")
-public class Creature
+public class Creature implements Serializable
 {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
