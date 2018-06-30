@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>com.wordpress.pirent420</groupId>
 		<artifactId>pirent-homm3</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0.0.Final</version>
 	</parent>
 	
 	<artifactId>pirent-homm3-persist</artifactId>
@@ -42,8 +42,7 @@
 		<dependency>
 			<groupId>com.wordpress.pirent420</groupId>
 			<artifactId>pirent-homm3-model</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>compile</scope>
+			<version>1.0.0.Final</version>
 		</dependency>
 
 		<dependency>
