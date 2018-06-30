@@ -5,40 +5,13 @@
 
 	<groupId>com.wordpress.pirent420</groupId>
 	<artifactId>pirent-homm3</artifactId>
-	<version>1.0.0.Final</version>
+	<version>2.0.0.SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>pirent-homm3</name>
 
-	<properties>
-		<!-- PLUGIN VERSIONS -->
-		<ejb-plugin-version>2.3</ejb-plugin-version>
-
-		<!-- EJB SPEC VERSIONS -->
-		<ejb-spec-version>3.1</ejb-spec-version>
-	</properties>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<!-- EJB PLUGIN -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-ejb-plugin</artifactId>
-					<version>${ejb-plugin-version}</version>
-					<configuration>
-						<ejbVersion>${ejb-spec-version}</ejbVersion>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 
 	<modules>
 		<module>pirent-homm3-model</module>
-		<module>pirent-homm3-persist</module>
-		<module>pirent-homm3-logic</module>
-		<module>pirent-homm3-cli</module>
-		<module>pirent-homm3-ear</module>
 	</modules>
 
 </project>

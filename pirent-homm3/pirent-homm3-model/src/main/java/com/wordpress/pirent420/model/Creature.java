@@ -3,19 +3,7 @@ package com.wordpress.pirent420.model;
 import java.io.Serializable;
 import java.util.Collection;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="creature")
 public class Creature implements Serializable
 {
 
@@ -24,8 +12,6 @@ public class Creature implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	private String name;
@@ -35,26 +21,15 @@ public class Creature implements Serializable
 	private Integer attack;
 	private Integer defense;
 	
-	@Column(name="damage_min")
 	private Integer damageMin;
 	
-	@Column(name="damage_max")
 	private Integer damageMax;
 	
 	private Integer speed;
 	private Integer shots;
 
-	@ManyToOne
-	@JoinColumn(name = "faction_id")
-	// Unidirectional relationship
 	private Faction faction;
 
-	@ManyToMany
-	@JoinTable(
-		name = "creature_special_ability", 
-		joinColumns = @JoinColumn(name = "creature_id"), 
-		inverseJoinColumns = @JoinColumn(name = "special_ability_id")
-	)
 	private Collection<SpecialAbility> specialAbilities;
 
 	public Creature()

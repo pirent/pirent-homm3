@@ -1,8 +1,0 @@
-# DAO defination:
-Oracle - Core J2EE Patterns - Data Access Object: http://www.oracle.com/technetwork/java/dataaccessobject-138824.html
-
-# Setup MySQL datasource for JBoss
-https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/6.2/html-single/Migration_Guide/#sect-Datasource_and_Resource_Adapter_Configuration_Changes
-
-# In case of occurring with errors like "Duplicate register resouces for jdbc driver"
-http://stackoverflow.com/questions/24097518/jboss-6-2-eap-unable-to-add-mysql-datasource-and-module
